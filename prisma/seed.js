@@ -27,7 +27,7 @@ try {
     ];
 
     const users = await Promise.all(
-        usersData.map((user) => prisma.user.create({ data: user })),
+        usersData.map((user) => prisma.users.create({ data: user })),
     );
 
     console.log("users created");
