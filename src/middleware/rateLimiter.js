@@ -1,4 +1,4 @@
-import { rateLimit } from 'express-rate-limit';
+import rateLimit from 'express-rate-limit';
 
 const LogInLimiter = rateLimit({
     windowMs: 60 * 1000, //1min

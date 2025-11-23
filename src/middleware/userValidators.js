@@ -3,7 +3,7 @@ import { body } from "express-validator";
 
 export const validateUser = [
     body('email')
-    .exists({ values: 'false' })
+    .exists({ checkFalsy: true })
     .withMessage('Email is required')
     .bail()
     .isEmail()
@@ -11,7 +11,7 @@ export const validateUser = [
     .normalizeEmail(),
 
     body('password')
-    .exists({ values: 'false' })
+    .exists({ checkFalsy: true })
     .withMessage('password is required')
     .bail()
     .isLength({min: 8, max: 64})
@@ -31,7 +31,7 @@ export const validateRole = [
 
 export const validateCreateUser = [
     body('email')
-        .exists({ values: 'false' })
+        .exists({ checkFalsy: true })
         .withMessage('Email is required')
         .bail()
         .isEmail()
@@ -39,7 +39,7 @@ export const validateCreateUser = [
         .normalizeEmail(),
 
     body('password')
-        .exists({ values: 'false' })
+        .exists({ checkFalsy: true })
         .withMessage('password is required')
         .bail()
         .isLength({min: 8, max: 64})

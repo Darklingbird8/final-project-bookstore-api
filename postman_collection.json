@@ -1,0 +1,127 @@
+{
+  "info": {
+    "name": "Bookstore API",
+    "_postman_id": "8b2249f2-11a3-4c63-bbea-b8d5a2c1dbe1",
+    "description": "Postman collection for Bookstore API. Use variables baseUrl, userToken, adminToken. Login first to populate tokens.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" },
+    { "key": "userToken", "value": "" },
+    { "key": "adminToken", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Auth - Login (user)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "{{baseUrl}}/api/auth/login", "host": ["{{baseUrl}}"], "path": ["api", "auth", "login"] },
+        "body": { "mode": "raw", "raw": "{\n  \"email\": \"user@gmail.com\",\n  \"password\": \"user1234\"\n}" }
+      }
+    },
+    {
+      "name": "Auth - Login (admin)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "{{baseUrl}}/api/auth/login", "host": ["{{baseUrl}}"], "path": ["api", "auth", "login"] },
+        "body": { "mode": "raw", "raw": "{\n  \"email\": \"admin@gmail.com\",\n  \"password\": \"admin1234\"\n}" }
+      }
+    },
+    {
+      "name": "Users - Me",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{userToken}}" }],
+        "url": { "raw": "{{baseUrl}}/api/users/me", "host": ["{{baseUrl}}"], "path": ["api", "users", "me"] }
+      }
+    },
+    {
+      "name": "Users - List (admin)",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+        "url": { "raw": "{{baseUrl}}/api/users", "host": ["{{baseUrl}}"], "path": ["api", "users"] }
+      }
+    },
+    {
+      "name": "Authors - List",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/api/authors", "host": ["{{baseUrl}}"], "path": ["api", "authors"] }
+      }
+    },
+    {
+      "name": "Authors - Create (admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{adminToken}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": { "raw": "{{baseUrl}}/api/authors", "host": ["{{baseUrl}}"], "path": ["api", "authors"] },
+        "body": { "mode": "raw", "raw": "{\n  \"name\": \"Test Author\"\n}" }
+      }
+    },
+    {
+      "name": "Books - List",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/api/books", "host": ["{{baseUrl}}"], "path": ["api", "books"] }
+      }
+    },
+    {
+      "name": "Books - Create (admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{adminToken}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": { "raw": "{{baseUrl}}/api/books", "host": ["{{baseUrl}}"], "path": ["api", "books"] },
+        "body": { "mode": "raw", "raw": "{\n  \"title\": \"Test Book\",\n  \"price\": 12.5,\n  \"stock\": 5,\n  \"authorId\": 1\n}" }
+      }
+    },
+    {
+      "name": "Orders - Create (user)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{userToken}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": { "raw": "{{baseUrl}}/api/orders", "host": ["{{baseUrl}}"], "path": ["api", "orders"] },
+        "body": { "mode": "raw", "raw": "{\n  \"order_items\": [\n    { \"book_id\": 1, \"quantity\": 1 }\n  ]\n}" }
+      }
+    },
+    {
+      "name": "Orders - My Orders (user)",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{userToken}}" }],
+        "url": { "raw": "{{baseUrl}}/api/orders", "host": ["{{baseUrl}}"], "path": ["api", "orders"] }
+      }
+    },
+    {
+      "name": "Orders - All (admin)",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+        "url": { "raw": "{{baseUrl}}/api/orders/all", "host": ["{{baseUrl}}"], "path": ["api", "orders", "all"] }
+      }
+    },
+    {
+      "name": "Orders - Update Status (admin)",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{adminToken}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": { "raw": "{{baseUrl}}/api/orders/1/status", "host": ["{{baseUrl}}"], "path": ["api", "orders", "1", "status"] },
+        "body": { "mode": "raw", "raw": "{\n  \"status\": \"COMPLETED\"\n}" }
+      }
+    }
+  ]
+}

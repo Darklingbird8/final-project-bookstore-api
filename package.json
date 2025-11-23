@@ -7,7 +7,12 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "node --env-file=.env --watch src/server.js"
+    "dev": "node --env-file=.env --watch src/server.js",
+    "start": "node --env-file=.env src/server.js",
+    "generate": "prisma generate",
+    "migrate": "prisma migrate dev",
+    "migrate:reset": "prisma migrate reset",
+    "seed": "node --env-file=.env prisma/seed.js"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
@@ -19,12 +24,14 @@
     "supertest": "^7.1.4"
   },
   "dependencies": {
-    "morgan": "^1.10.0",
     "@prisma/client": "^6.12.0",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "express": "^5.1.0",
+    "express-rate-limit": "^8.2.1",
     "express-validator": "^7.2.1",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "swagger-ui-express": "^5.0.1"
   }
 }
