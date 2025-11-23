@@ -7,6 +7,7 @@ import {
     updateUser,
     deleteUser,
 } from '../repositories/userRepo.js';
+import { findOrdersByUser } from '../repositories/orderRepo.js';
 import bcrypt from 'bcrypt';
 
 export async function getAllUsers() {
@@ -15,8 +16,9 @@ export async function getAllUsers() {
 
 export async function createUserService(userData) {
     const hashedPassword = await bcrypt.hash(userData.password, 10);
+    const normalizedEmail = String(userData.email).trim().toLowerCase();
     const userToCreate = {
-        email: userData.email,
+        email: normalizedEmail,
         password: hashedPassword,
         role: userData.role || 'USER',
     };
@@ -112,12 +114,7 @@ export async function deleteUserById(id) {
 }
 
 export async function getUserOrders(userId) {
-    // TODO: Implement when order repository is created
-    // Currently not implemented as orderRepo doesn't exist yet
-    // This should query prisma.orders.findMany({ where: { userId } })
-    const error = new Error('Order functionality not yet implemented');
-    error.status = 501; // Not Implemented
-    throw error;
+    return findOrdersByUser(userId);
 }
 
 export async function updateUserRole(id, role) {

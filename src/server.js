@@ -4,6 +4,10 @@ import morgan from 'morgan';
 
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import authorRoutes from './routes/authorRoutes.js';
+import bookRoutes from './routes/bookRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
+import { swaggerUi, swaggerDocument } from './docs/swagger.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,8 +17,14 @@ app.use(morgan('tiny'));
 
 app.use(express.json());
 
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.get('/api/docs.json', (req, res) => res.json(swaggerDocument));
+
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/authors', authorRoutes);
+app.use('/api/books', bookRoutes);
+app.use('/api/orders', orderRoutes);
 
 app.use((req, res, next) => {
   const err = new Error('Not Found');
