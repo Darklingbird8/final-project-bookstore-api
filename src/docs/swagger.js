@@ -8,7 +8,10 @@ const swaggerDocument = {
     description:
       'Bookstore REST API with JWT auth, role-based and ownership-based authorization. Main resources: authors, books, orders, users.',
   },
-  servers: [{ url: 'http://localhost:3000', description: 'Local dev' }],
+  servers: [
+    { url: 'http://localhost:3000', description: 'Local dev' },
+    { url: 'https://final-project-bookstore-api.onrender.com', description: 'Render prod' },
+  ],
   components: {
     securitySchemes: {
       bearerAuth: {
