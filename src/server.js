@@ -11,6 +11,7 @@ import { swaggerUi, swaggerDocument } from './docs/swagger.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+app.set('trust proxy', 1); // honor X-Forwarded-For on Render
 app.use(cors());
 
 app.use(morgan('tiny'));
