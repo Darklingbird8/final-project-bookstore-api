@@ -26,7 +26,7 @@ model Books {
   title String
   price Float
   stock Int
-  author Authors @relation(fields: [authorId], references: [id])
+  author Authors @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId Int
   @@map("books")
   orderItems Order_Items[]
@@ -48,7 +48,7 @@ enum Role {
 
 model Orders {
   id Int @id @default(autoincrement())
-  user Users @relation(fields: [userId], references: [id])
+  user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
   status String
   @@map("orders")
@@ -56,9 +56,9 @@ model Orders {
 }
 
 model Order_Items {
-  order Orders @relation(fields: [orderId], references: [id])
+  order Orders @relation(fields: [orderId], references: [id], onDelete: Cascade)
   orderId Int
-  book Books @relation(fields: [bookId], references: [id])
+  book Books @relation(fields: [bookId], references: [id], onDelete: Cascade)
   bookId Int
   quantity Int
   @@id([orderId, bookId])
